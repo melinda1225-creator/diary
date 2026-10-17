@@ -36,5 +36,5 @@ function cspPlugin() {
 // (User/Organization Pages, 즉 <아이디>.github.io 레포라면 base: '/' 유지)
 export default defineConfig({
   plugins: [react(), cspPlugin()],
-  base: '/our-diary/',
+  base: '/diary/',
 })
