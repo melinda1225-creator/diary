@@ -8,9 +8,12 @@ import Avatar from './Avatar.jsx'
 const PALETTE = ['#3F9C8B', '#E8748C', '#E3A63E', '#6C7FDB', '#7FA26E', '#9C6BA8', '#4FA0D9']
 const BG_PALETTE = ['#fdf1f3', '#eef2fb', '#f4f5f0', '#eaf7f0', '#fdf6e3', '#f3eefc', '#ffffff']
 
+const DATA_OWNER = 'melinda1225-creator'
+const DATA_REPO = 'diary-data'
+
 export default function Setup() {
   const auth = useAuth()
-  const [form, setForm] = useState({ owner: '', repo: '', token: '', remember: true })
+  const [form, setForm] = useState({ token: '', remember: true })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
@@ -19,7 +22,7 @@ export default function Setup() {
     setLoading(true)
     setError(null)
     try {
-      await auth.connect({ owner: form.owner, repo: form.repo, token: form.token, remember: form.remember })
+      await auth.connect({ owner: DATA_OWNER, repo: DATA_REPO, token: form.token, remember: form.remember })
     } catch (err) {
       setError(err.message || '연결에 실패했어요. 저장소 이름과 토큰을 확인해주세요.')
     } finally {
@@ -31,20 +34,6 @@ export default function Setup() {
     return (
       <ScreenShell title="저장소 연결하기" subtitle={`${DIARY_WORD} 데이터를 저장할 GitHub private 레포와 개인 액세스 토큰을 입력해주세요.`}>
         <form onSubmit={handleConnect} className="setup-form">
-          <label>
-            <span>레포 소유자 (아이디)</span>
-            <input
-              type="text" placeholder="예: minji-kim" required
-              value={form.owner} onChange={(e) => setForm({ ...form, owner: e.target.value })}
-            />
-          </label>
-          <label>
-            <span>레포 이름</span>
-            <input
-              type="text" placeholder="예: our-diary-data" required
-              value={form.repo} onChange={(e) => setForm({ ...form, repo: e.target.value })}
-            />
-          </label>
           <label>
             <span>Personal Access Token</span>
             <input
