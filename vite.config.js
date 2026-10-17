@@ -12,7 +12,7 @@ const CSP = [
   "font-src https://cdn.jsdelivr.net",
   "img-src 'self' data: blob:",
   "connect-src https://api.github.com",
-  "base-uri '/diray/'",
+  "base-uri '/diary/'",
   "form-action 'none'",
   "object-src 'none'",
 ].join('; ')
